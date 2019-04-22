@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/platform" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-gen" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-mp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-schedule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-shop" charset="UTF-8" />
+  </component>
+</project>

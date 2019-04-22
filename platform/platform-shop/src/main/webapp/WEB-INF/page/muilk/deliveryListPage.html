@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>配送员管理</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<style>
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 480px;
+    }
+</style>
+<div id="delivery" v-cloak>
+    <div v-show="tableDivFlag">
+        <Row :gutter="16">
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.name" placeholder="配送员名字"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.phone" placeholder="配送员电话"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.jurisdiction" placeholder="配送员管辖范围"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
+            <div class="buttons-group">
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+            </div>
+        </Row>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+    <Card v-show="editFlag">
+        <Tabs value="name1">
+            <Tab-Pane :label="title" name="name1">
+                <i-form label-width="100" ref="formValidate" :rules="ruleValidate">
+                    <Form-item label="管辖范围">
+                        <i-select v-model="formItem.jurisdiction" filterable>
+                            <!--:key="attributeCategory.id"-->
+                            <i-option v-for="jurisdiction in jurisdictions" :value="jurisdiction.value"
+                            >{{jurisdiction.lable}}
+                            </i-option>
+
+                        </i-select>
+                    </Form-item>
+                    <Form-item label="配送员名字">
+                        <i-input v-model="formItem.name" icon="eye"
+                                 placeholder="配送员名字"/>
+                    </Form-item>
+                    <Form-item label="配送员电话">
+                        <i-input v-model="formItem.phone" icon="eye"
+                                 placeholder="配送员电话"/>
+                    </Form-item>
+
+                </i-form>
+            </Tab-Pane>
+
+        </Tabs>
+        <div style="padding-left: 20px; margin-bottom: 30px">
+            <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
+            <i-button type="warning" @click="reload" style="margin-left: 8px"/>
+            返回</i-button>
+        </div>
+    </Card>
+    <div v-show="taskFlag">
+        <Tabs value="name2">
+            <Tab-Pane label="配送任务" name="name2">
+                <span>选择时间</span>
+                <el-date-picker
+                        v-model="taskDate"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                </el-date-picker>
+                <span>选择范围</span>
+                <el-cascader
+                        :options="cascaderOptions"
+                        v-model="range"
+                >
+                </el-cascader>
+                <el-button type="info">查询</el-button>
+                <el-button type="warning" @click="taskBack">返回</el-button>
+                <!--<el-card class="box-card" style="float: left" v-for="b in 2">
+                    <div slot="header" >
+                        <span>配送日期:2019-01-10 12:00:05</span>
+                    </div>
+                    <div class="text item">
+                        自提柜编号:A001
+                    </div>
+                    <div class="text item">
+                       状态:在线
+                    </div>
+                    <div class="text item">
+                        小区:郑州市金水区丽水花园
+                    </div>
+                    <div class="text item">
+                        片区:小区南门
+                    </div>
+                </el-card>-->
+                <span v-for="b in 2">
+                    <el-table
+                            :data="tableData3"
+                            style="width: 100%"
+                            size="mini"
+                            :span-method="objectSpanMethod"
+                            border
+                    >
+
+                                       <el-table-column
+                                               prop="info"
+                                               label="配送信息"
+                                               width="200">
+                                       </el-table-column>
+                                 <el-table-column
+                                         prop="orderNum"
+                                         label="订单号"
+                                         width="120">
+                            </el-table-column>
+                                <el-table-column
+                                        prop="code"
+                                        label="格子编号"
+                                        width="120">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="spec"
+                                        label="规格"
+                                        width="120">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="goods"
+                                        label="补货"
+                                        width="300">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="receiver"
+                                        label="收货人"
+                                        width="300">
+                                </el-table-column>
+                    </el-table>
+                    <br>
+                    </span>
+
+            </Tab-Pane>
+        </Tabs>
+        <!--分页-->
+        <el-pagination
+                :current-page="1"
+                :page-size="6"
+                layout="total,  prev, pager, next, jumper"
+                :total="400">
+        </el-pagination>
+
+    </div>
+</div>
+<script src="${rc.contextPath}/js/muilk/area.json?_${date.systemTime}"></script>
+<script src="${rc.contextPath}/js/muilk/delivery.js?_${date.systemTime}"></script>
+</body>
+</html>

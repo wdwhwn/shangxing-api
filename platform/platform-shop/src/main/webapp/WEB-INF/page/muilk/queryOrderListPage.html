@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单管理:订单查询</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<div id="queryOrder" v-cloak>
+    <div v-show="tableDivFlag">
+        <Row :gutter="16">
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.orderId" placeholder="订单号"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.customerName" placeholder="客户名"/>
+                </i-col>
+                <i-col span="4">
+                    <i-select v-model="q.status" placeholder="状态">
+                        <i-option v-for="i in statuss " :value="i.value">{{i.label}}</i-option>
+
+                    </i-select>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
+            <div class="buttons-group">
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+            </div>
+        </Row>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+</div>
+</div>
+<script src="${rc.contextPath}/js/muilk/queryOrder.js?_${date.systemTime}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单管理:待分配订单</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<style>
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 100%;
+    }
+    .el-select .el-input {
+        width: 130px;
+    }
+    .input-with-select .el-input-group__prepend {
+        background-color: #fff;
+    }
+</style>
+<div id="delivery" v-cloak>
+    <div v-show="tableDivFlag">
+
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+    <el-dialog title="" :visible.sync="dialogFormVisible" width="50%">
+        <el-card class="box-card">
+
+            <div class="text item">
+                查找配送员:
+                <!-- <el-input placeholder="请输入内容" v-model="name" class="input-with-select">-->
+
+                <el-autocomplete
+                        class="inline-input"
+                        v-model="state1"
+                        :fetch-suggestions="querySearch"
+                        placeholder="请输入内容"
+                >
+                    <el-select v-model="select" slot="prepend" placeholder="请选择">
+                        <el-option label="丽水花园" value="1"></el-option>
+                        <el-option label="太极乡" value="2"></el-option>
+                        <el-option label="玫瑰谷" value="3"></el-option>
+                    </el-select>
+
+                </el-autocomplete>
+                <el-button slot="append" icon="el-icon-search"></el-button>
+                <!--</el-input>-->
+
+            </div>
+        </el-card>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+    </el-dialog>
+</div>
+<script src="${rc.contextPath}/js/muilk/pendingAllocationOrder.js?_${date.systemTime}"></script>
+</body>
+</html>

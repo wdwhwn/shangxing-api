@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单管理:订单设置</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<style>
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 60%;
+    }
+</style>
+<div id="orderSetting" v-cloak>
+    <el-tabs type="border-card" style="height: 100%">
+        <el-tab-pane>
+            <span slot="label"><i class="el-icon-date"></i> 付款设置</span>
+            <el-tabs tab-position="left" style="height: 200px;">
+                <el-tab-pane label="付款来源">
+                    <el-select v-model="paySource" placeholder="请选择">
+                        <!--<el-option value="支付宝">支付宝</el-option>-->
+                        <el-option value="微信">微信</el-option>
+                        <!-- <el-option value="其他">其他</el-option>-->
+                    </el-select>
+                    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                    <el-button type="success" @click="save" icon="el-icon-check" circle></el-button>
+                </el-tab-pane>
+            </el-tabs>
+        </el-tab-pane>
+        <el-tab-pane label="收货设置">
+            <el-tabs tab-position="left" style="height: 200px;">
+                <el-tab-pane label="自动确认收货时间设置(单位:天)">
+                    <el-select v-model="reciv" @change="closeTimeChange" placeholder="请选择">
+                        <el-option value="10">10</el-option>
+                        <el-option value="15">15</el-option>
+                        <el-option value="20">20</el-option>
+                        <el-option value="自定义">自定义</el-option>
+                    </el-select>
+                    <el-input type="text" v-model="reciv2" style="width: 100px;" v-show="recivShow"
+                              placeholder="请输入内容"></el-input>
+                    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                    <el-button type="success" @click="save" icon="el-icon-check" circle></el-button>
+                </el-tab-pane>
+            </el-tabs>
+        </el-tab-pane>
+        <el-tab-pane label="订单过期时间设置">
+            <el-tabs tab-position="left" style="height: 200px;">
+                <el-tab-pane label="未付款超过多长时间自动关闭(单位:分钟)">
+                    <el-select v-model="closeTime" @change="closeTimeChange" placeholder="请选择">
+                        <el-option value="10">10</el-option>
+                        <el-option value="15">15</el-option>
+                        <el-option value="20">20</el-option>
+                        <el-option value="自定义">自定义</el-option>
+                    </el-select>
+                    <el-input type="text" v-model="closeTime2" style="width: 100px;" v-show="closeTimeShow"
+                              placeholder="请输入内容"></el-input>
+                    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                    <el-button type="success" @click="save" icon="el-icon-check" circle></el-button>
+                </el-tab-pane>
+            </el-tabs>
+        </el-tab-pane>
+
+        <el-tab-pane label="配送模式设置">
+            <el-tabs tab-position="left">
+                <el-tab-pane label="配送模式">
+                    <el-dialog title="新增规则" :visible.sync="dialogFormVisible">
+                        <el-form :model="form">
+                            <el-form-item label="编码" :label-width="formLabelWidth">
+                                <el-input v-model="form.code" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="规则" :label-width="formLabelWidth">
+                                <el-input v-model="form.rule" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="备注" :label-width="formLabelWidth">
+                                <el-input v-model="form.remake" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">取 消</el-button>
+                            <el-button type="primary" @click="addSubmit">确 定</el-button>
+                        </div>
+                    </el-dialog>
+                    <el-button
+                            type="primary"
+                            size="mini"
+                            @click="add">新增
+                    </el-button>
+                    <el-table
+                            :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                            border
+                            height="400"
+                    >
+                        <el-table-column
+                                prop="id"
+                                label="序号"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="code"
+                                label="编码"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="rule"
+                                label="规则">
+                        </el-table-column>
+                        <el-table-column
+                                prop="remake"
+                                label="备注">
+                        </el-table-column>
+                        <el-table-column  align="right" label="操作" >
+                            <template slot="header" slot-scope="scope">
+                                <el-input
+                                        v-model="search"
+                                        size="mini"
+                                        placeholder="输入关键字搜索"/>
+                            </template>
+                            <template slot-scope="scope">
+                                <el-button
+                                        size="mini"
+                                        @click="handleEdit(scope.$index, scope.row)">Edit
+                                </el-button>
+                                <el-button
+                                        size="mini"
+                                        type="danger"
+                                        @click="handleDelete(scope.$index, scope.row)">Delete
+                                </el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-tab-pane>
+
+            </el-tabs>
+        </el-tab-pane>
+
+
+        <el-tab-pane label="顶单运费计算规则设置">顶单运费计算规则设置</el-tab-pane>
+        <el-tab-pane label="设置订单起送价">设置订单起送价</el-tab-pane>
+        <el-tab-pane label="订单退款设置">订单退款设置</el-tab-pane>
+    </el-tabs>
+
+</div>
+<script src="${rc.contextPath}/js/muilk/orderSetting.js?_${date.systemTime}"></script>
+</body>
+</html>

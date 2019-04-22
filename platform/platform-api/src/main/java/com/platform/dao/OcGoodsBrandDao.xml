@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcGoodsBrandDao">
+
+    <resultMap type="com.platform.entity.OcGoodsBrandEntity" id="ocGoodsBrandMap">
+        <result property="brandId" column="brand_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="brandInitial" column="brand_initial"/>
+        <result property="cover" column="cover"/>
+        <result property="brandPic" column="brand_pic"/>
+        <result property="brandRecommend" column="brand_recommend"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.OcGoodsBrandEntity">
+		select
+			`brand_id`,
+			`shop_id`,
+			`brand_name`,
+			`brand_initial`,
+			`cover`,
+			`brand_pic`,
+			`brand_recommend`,
+			`sort`
+		from oc_goods_brand
+		where brand_id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.OcGoodsBrandEntity">
+		select
+    		`brand_id`,
+    		`shop_id`,
+    		`brand_name`,
+    		`brand_initial`,
+    		`cover`,
+    		`brand_pic`,
+    		`brand_recommend`,
+    		`sort`
+		from oc_goods_brand
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by brand_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_goods_brand
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.OcGoodsBrandEntity" useGeneratedKeys="true" keyProperty="brandId">
+		insert into oc_goods_brand(
+			`shop_id`,
+			`brand_name`,
+			`brand_initial`,
+			`cover`,
+			`brand_pic`,
+			`brand_recommend`,
+			`sort`)
+		values(
+			#{shopId},
+			#{brandName},
+			#{brandInitial},
+			#{cover},
+			#{brandPic},
+			#{brandRecommend},
+			#{sort})
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.OcGoodsBrandEntity">
+		update oc_goods_brand 
+		<set>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="brandName != null">`brand_name` = #{brandName}, </if>
+			<if test="brandInitial != null">`brand_initial` = #{brandInitial}, </if>
+			<if test="cover != null">`cover` = #{cover}, </if>
+			<if test="brandPic != null">`brand_pic` = #{brandPic}, </if>
+			<if test="brandRecommend != null">`brand_recommend` = #{brandRecommend}, </if>
+			<if test="sort != null">`sort` = #{sort}</if>
+		</set>
+		where brand_id = #{brandId}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_goods_brand where brand_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_goods_brand where brand_id in 
+		<foreach item="brandId" collection="array" open="(" separator="," close=")">
+			#{brandId}
+		</foreach>
+	</delete>
+
+</mapper>

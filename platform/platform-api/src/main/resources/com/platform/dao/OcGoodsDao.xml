@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcGoodsDao">
+
+    <resultMap type="com.platform.entity.OcGoodsEntity" id="ocGoodsMap">
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="supplierId" column="supplier_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryId1" column="category_id_1"/>
+        <result property="categoryId2" column="category_id_2"/>
+        <result property="categoryId3" column="category_id_3"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="groupIdArray" column="group_id_array"/>
+        <result property="promotionPrice" column="promotion_price"/>
+        <result property="promotionType" column="promotion_type"/>
+        <result property="discountId" column="discount_id"/>
+        <result property="festivalId" column="festival_id"/>
+        <result property="goodsType" column="goods_type"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="price" column="price"/>
+        <result property="supplierPrice" column="supplier_price"/>
+        <result property="memberPrice" column="member_price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="limitmoney" column="limitmoney"/>
+        <result property="pointExchangeType" column="point_exchange_type"/>
+        <result property="pointExchange" column="point_exchange"/>
+        <result property="givePoint" column="give_point"/>
+        <result property="isMemberDiscount" column="is_member_discount"/>
+        <result property="shippingFee" column="shipping_fee"/>
+        <result property="shippingFeeId" column="shipping_fee_id"/>
+        <result property="stock" column="stock"/>
+        <result property="maxBuy" column="max_buy"/>
+        <result property="clicks" column="clicks"/>
+        <result property="minStockAlarm" column="min_stock_alarm"/>
+        <result property="sales" column="sales"/>
+        <result property="collects" column="collects"/>
+        <result property="star" column="star"/>
+        <result property="evaluates" column="evaluates"/>
+        <result property="shares" column="shares"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="districtId" column="district_id"/>
+        <result property="streetId" column="street_id"/>
+        <result property="locationplace" column="locationplace"/>
+        <result property="picture" column="picture"/>
+        <result property="keywords" column="keywords"/>
+        <result property="introduction" column="introduction"/>
+        <result property="description" column="description"/>
+        <result property="qrcode" column="QRcode"/>
+        <result property="videourl" column="videoUrl"/>
+        <result property="code" column="code"/>
+        <result property="isStockVisible" column="is_stock_visible"/>
+        <result property="isHot" column="is_hot"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="isNew" column="is_new"/>
+        <result property="isPreSale" column="is_pre_sale"/>
+        <result property="isBill" column="is_bill"/>
+        <result property="status" column="status"/>
+        <result property="sort" column="sort"/>
+        <result property="imgIdArray" column="img_id_array"/>
+        <result property="skuImgArray" column="sku_img_array"/>
+        <result property="matchPoint" column="match_point"/>
+        <result property="matchRatio" column="match_ratio"/>
+        <result property="realSales" column="real_sales"/>
+        <result property="goodsAttributeId" column="goods_attribute_id"/>
+        <result property="goodsSpecFormat" column="goods_spec_format"/>
+        <result property="goodsWeight" column="goods_weight"/>
+        <result property="goodsVolume" column="goods_volume"/>
+        <result property="shippingFeeType" column="shipping_fee_type"/>
+        <result property="extendCategoryId" column="extend_category_id"/>
+        <result property="extendCategoryId1" column="extend_category_id_1"/>
+        <result property="extendCategoryId2" column="extend_category_id_2"/>
+        <result property="extendCategoryId3" column="extend_category_id_3"/>
+        <result property="saleDate" column="sale_date"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="minBuy" column="min_buy"/>
+        <result property="virtualGoodsTypeId" column="virtual_goods_type_id"/>
+        <result property="productionDate" column="production_date"/>
+        <result property="shelfLife" column="shelf_life"/>
+        <result property="goodsVideoAddress" column="goods_video_address"/>
+        <result property="maxUsePoint" column="max_use_point"/>
+        <result property="isOpenPresell" column="is_open_presell"/>
+        <result property="presellTime" column="presell_time"/>
+        <result property="presellDay" column="presell_day"/>
+        <result property="presellDeliveryType" column="presell_delivery_type"/>
+        <result property="presellPrice" column="presell_price"/>
+        <result property="goodsUnit" column="goods_unit"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.OcGoodsEntity">
+		select
+			`goods_id`,
+			`goods_name`,
+			`supplier_id`,
+			`shop_id`,
+			`category_id`,
+			`category_id_1`,
+			`category_id_2`,
+			`category_id_3`,
+			`brand_id`,
+			`group_id_array`,
+			`promotion_price`,
+			`promotion_type`,
+			`discount_id`,
+			`festival_id`,
+			`goods_type`,
+			`market_price`,
+			`price`,
+			`supplier_price`,
+			`member_price`,
+			`cost_price`,
+			`limitmoney`,
+			`point_exchange_type`,
+			`point_exchange`,
+			`give_point`,
+			`is_member_discount`,
+			`shipping_fee`,
+			`shipping_fee_id`,
+			`stock`,
+			`max_buy`,
+			`clicks`,
+			`min_stock_alarm`,
+			`sales`,
+			`collects`,
+			`star`,
+			`evaluates`,
+			`shares`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`street_id`,
+			`locationplace`,
+			`picture`,
+			`keywords`,
+			`introduction`,
+			`description`,
+			`QRcode`,
+			`videoUrl`,
+			`code`,
+			`is_stock_visible`,
+			`is_hot`,
+			`is_recommend`,
+			`is_new`,
+			`is_pre_sale`,
+			`is_bill`,
+			`status`,
+			`sort`,
+			`img_id_array`,
+			`sku_img_array`,
+			`match_point`,
+			`match_ratio`,
+			`real_sales`,
+			`goods_attribute_id`,
+			`goods_spec_format`,
+			`goods_weight`,
+			`goods_volume`,
+			`shipping_fee_type`,
+			`extend_category_id`,
+			`extend_category_id_1`,
+			`extend_category_id_2`,
+			`extend_category_id_3`,
+			`sale_date`,
+			`create_time`,
+			`update_time`,
+			`min_buy`,
+			`virtual_goods_type_id`,
+			`production_date`,
+			`shelf_life`,
+			`goods_video_address`,
+			`max_use_point`,
+			`is_open_presell`,
+			`presell_time`,
+			`presell_day`,
+			`presell_delivery_type`,
+			`presell_price`,
+			`goods_unit`
+		from oc_goods
+		where goods_id = #{id}
+	</select>
+<!--会员店铺 商品列表-->
+	<select id="queryList" resultType="com.platform.entity.OcGoodsEntity">
+		select
+    		`goods_id`,
+    		`goods_name`,
+    		`supplier_id`,
+    		`shop_id`,
+    		`category_id`,
+    		`category_id_1`,
+    		`category_id_2`,
+    		`category_id_3`,
+    		`brand_id`,
+    		`group_id_array`,
+    		`promotion_price`,
+    		`promotion_type`,
+    		`discount_id`,
+    		`festival_id`,
+    		`goods_type`,
+    		`market_price`,
+    		`price`,
+    		`supplier_price`,
+    		`member_price`,
+    		`cost_price`,
+    		`limitmoney`,
+    		`point_exchange_type`,
+    		`point_exchange`,
+    		`give_point`,
+    		`is_member_discount`,
+    		`shipping_fee`,
+    		`shipping_fee_id`,
+    		`stock`,
+    		`max_buy`,
+    		`clicks`,
+    		`min_stock_alarm`,
+    		`sales`,
+    		`collects`,
+    		`star`,
+    		`evaluates`,
+    		`shares`,
+    		`province_id`,
+    		`city_id`,
+    		`district_id`,
+    		`street_id`,
+    		`locationplace`,
+    		`picture`,
+    		`keywords`,
+    		`introduction`,
+    		`description`,
+    		`QRcode`,
+    		`videoUrl`,
+    		`code`,
+    		`is_stock_visible`,
+    		`is_hot`,
+    		`is_recommend`,
+    		`is_new`,
+    		`is_pre_sale`,
+    		`is_bill`,
+    		`status`,
+    		`sort`,
+    		`img_id_array`,
+    		`sku_img_array`,
+    		`match_point`,
+    		`match_ratio`,
+    		`real_sales`,
+    		`goods_attribute_id`,
+    		`goods_spec_format`,
+    		`goods_weight`,
+    		`goods_volume`,
+    		`shipping_fee_type`,
+    		`extend_category_id`,
+    		`extend_category_id_1`,
+    		`extend_category_id_2`,
+    		`extend_category_id_3`,
+    		`sale_date`,
+    		`create_time`,
+    		`update_time`,
+    		`min_buy`,
+    		`virtual_goods_type_id`,
+    		`production_date`,
+    		`shelf_life`,
+    		`goods_video_address`,
+    		`max_use_point`,
+    		`is_open_presell`,
+    		`presell_time`,
+    		`presell_day`,
+    		`presell_delivery_type`,
+    		`presell_price`,
+    		`goods_unit`
+		from oc_goods
+		WHERE 1=1
+		<if test="shopId != null and shopId.trim() != ''">
+			AND shop_id=#{shopId}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by goods_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<!-- 会员店铺 商品列表-->
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_goods
+		WHERE 1=1
+		<if test="shopId != null and shopId.trim() != ''">
+			AND shop_id=#{shopId}
+		</if>
+	</select>
+	<!--商品模块 商品列表-->
+	<select id="queryGoodsList" resultType="com.platform.entity.OcGoodsEntity">
+		select
+		`goods_id`,
+		`goods_name`,
+		`supplier_id`,
+		`shop_id`,
+		`category_id`,
+		`category_id_1`,
+		`category_id_2`,
+		`category_id_3`,
+		`brand_id`,
+		`group_id_array`,
+		`promotion_price`,
+		`promotion_type`,
+		`discount_id`,
+		`festival_id`,
+		`goods_type`,
+		`market_price`,
+		`price`,
+		`supplier_price`,
+		`member_price`,
+		`cost_price`,
+		`limitmoney`,
+		`point_exchange_type`,
+		`point_exchange`,
+		`give_point`,
+		`is_member_discount`,
+		`shipping_fee`,
+		`shipping_fee_id`,
+		`stock`,
+		`max_buy`,
+		`clicks`,
+		`min_stock_alarm`,
+		`sales`,
+		`collects`,
+		`star`,
+		`evaluates`,
+		`shares`,
+		`province_id`,
+		`city_id`,
+		`district_id`,
+		`street_id`,
+		`locationplace`,
+		`picture`,
+		`keywords`,
+		`introduction`,
+		`description`,
+		`QRcode`,
+		`videoUrl`,
+		`code`,
+		`is_stock_visible`,
+		`is_hot`,
+		`is_recommend`,
+		`is_new`,
+		`is_pre_sale`,
+		`is_bill`,
+		`status`,
+		`sort`,
+		`img_id_array`,
+		`sku_img_array`,
+		`match_point`,
+		`match_ratio`,
+		`real_sales`,
+		`goods_attribute_id`,
+		`goods_spec_format`,
+		`goods_weight`,
+		`goods_volume`,
+		`shipping_fee_type`,
+		`extend_category_id`,
+		`extend_category_id_1`,
+		`extend_category_id_2`,
+		`extend_category_id_3`,
+		`sale_date`,
+		`create_time`,
+		`update_time`,
+		`min_buy`,
+		`virtual_goods_type_id`,
+		`production_date`,
+		`shelf_life`,
+		`goods_video_address`,
+		`max_use_point`,
+		`is_open_presell`,
+		`presell_time`,
+		`presell_day`,
+		`presell_delivery_type`,
+		`presell_price`,
+		`goods_unit`
+		from oc_goods
+		WHERE 1=1
+		<if test="isHot != null and isHot.trim() != ''">
+			AND is_hot=#{isHot}
+		</if>
+		<if test="isRecommend != null and isRecommend.trim() != ''">
+			AND is_recommend=#{is_recommend}
+		</if>
+		<if test="isNew != null and isNew.trim() != ''">
+			AND is_new=#{isNew}
+		</if>
+		<if test="supplierId != null and supplierId.trim() != ''">
+		AND suppler_id=#{supplierId}
+		</if>
+		<if test="proviceId != null and supplierId.trim() != ''">
+			AND provice_id=#{supplierId}
+		</if>
+		<if test="cityId != null and supplierId.trim() != ''">
+			AND city_id=#{supplierId}
+		</if>
+		<if test="districtId != null and districtId.trim() != ''">
+			AND district_id=#{districtId}
+		</if>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by goods_id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<!-- 商品模块 商品列表-->
+	<select id="queryGoodsTotal" resultType="int">
+		select count(*) from oc_goods
+		WHERE 1=1
+		<if test="isHot != null and isHot.trim() != ''">
+			AND is_hot=#{isHot}
+		</if>
+		<if test="isRecommend != null and isRecommend.trim() != ''">
+			AND is_recommend=#{is_recommend}
+		</if>
+		<if test="isNew != null and isNew.trim() != ''">
+			AND is_new=#{isNew}
+		</if>
+		<if test="supplierId != null and supplierId.trim() != ''">
+			AND suppler_id=#{supplierId}
+		</if>
+		<if test="proviceId != null and supplierId.trim() != ''">
+			AND provice_id=#{supplierId}
+		</if>
+		<if test="cityId != null and supplierId.trim() != ''">
+			AND city_id=#{supplierId}
+		</if>
+		<if test="districtId != null and districtId.trim() != ''">
+			AND district_id=#{districtId}
+		</if>
+	</select>
+	<insert id="save" parameterType="com.platform.entity.OcGoodsEntity" useGeneratedKeys="true" keyProperty="goodsId">
+		insert into oc_goods(
+			`goods_name`,
+			`supplier_id`,
+			`shop_id`,
+			`category_id`,
+			`category_id_1`,
+			`category_id_2`,
+			`category_id_3`,
+			`brand_id`,
+			`group_id_array`,
+			`promotion_price`,
+			`promotion_type`,
+			`discount_id`,
+			`festival_id`,
+			`goods_type`,
+			`market_price`,
+			`price`,
+			`supplier_price`,
+			`member_price`,
+			`cost_price`,
+			`limitmoney`,
+			`point_exchange_type`,
+			`point_exchange`,
+			`give_point`,
+			`is_member_discount`,
+			`shipping_fee`,
+			`shipping_fee_id`,
+			`stock`,
+			`max_buy`,
+			`clicks`,
+			`min_stock_alarm`,
+			`sales`,
+			`collects`,
+			`star`,
+			`evaluates`,
+			`shares`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`street_id`,
+			`locationplace`,
+			`picture`,
+			`keywords`,
+			`introduction`,
+			`description`,
+			`QRcode`,
+			`videoUrl`,
+			`code`,
+			`is_stock_visible`,
+			`is_hot`,
+			`is_recommend`,
+			`is_new`,
+			`is_pre_sale`,
+			`is_bill`,
+			`status`,
+			`sort`,
+			`img_id_array`,
+			`sku_img_array`,
+			`match_point`,
+			`match_ratio`,
+			`real_sales`,
+			`goods_attribute_id`,
+			`goods_spec_format`,
+			`goods_weight`,
+			`goods_volume`,
+			`shipping_fee_type`,
+			`extend_category_id`,
+			`extend_category_id_1`,
+			`extend_category_id_2`,
+			`extend_category_id_3`,
+			`sale_date`,
+			`create_time`,
+			`update_time`,
+			`min_buy`,
+			`virtual_goods_type_id`,
+			`production_date`,
+			`shelf_life`,
+			`goods_video_address`,
+			`max_use_point`,
+			`is_open_presell`,
+			`presell_time`,
+			`presell_day`,
+			`presell_delivery_type`,
+			`presell_price`,
+			`goods_unit`)
+		values(
+			#{goodsName},
+			#{supplierId},
+			#{shopId},
+			#{categoryId},
+			#{categoryId1},
+			#{categoryId2},
+			#{categoryId3},
+			#{brandId},
+			#{groupIdArray},
+			#{promotionPrice},
+			#{promotionType},
+			#{discountId},
+			#{festivalId},
+			#{goodsType},
+			#{marketPrice},
+			#{price},
+			#{supplierPrice},
+			#{memberPrice},
+			#{costPrice},
+			#{limitmoney},
+			#{pointExchangeType},
+			#{pointExchange},
+			#{givePoint},
+			#{isMemberDiscount},
+			#{shippingFee},
+			#{shippingFeeId},
+			#{stock},
+			#{maxBuy},
+			#{clicks},
+			#{minStockAlarm},
+			#{sales},
+			#{collects},
+			#{star},
+			#{evaluates},
+			#{shares},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{streetId},
+			#{locationplace},
+			#{picture},
+			#{keywords},
+			#{introduction},
+			#{description},
+			#{qrcode},
+			#{videourl},
+			#{code},
+			#{isStockVisible},
+			#{isHot},
+			#{isRecommend},
+			#{isNew},
+			#{isPreSale},
+			#{isBill},
+			#{status},
+			#{sort},
+			#{imgIdArray},
+			#{skuImgArray},
+			#{matchPoint},
+			#{matchRatio},
+			#{realSales},
+			#{goodsAttributeId},
+			#{goodsSpecFormat},
+			#{goodsWeight},
+			#{goodsVolume},
+			#{shippingFeeType},
+			#{extendCategoryId},
+			#{extendCategoryId1},
+			#{extendCategoryId2},
+			#{extendCategoryId3},
+			#{saleDate},
+			#{createTime},
+			#{updateTime},
+			#{minBuy},
+			#{virtualGoodsTypeId},
+			#{productionDate},
+			#{shelfLife},
+			#{goodsVideoAddress},
+			#{maxUsePoint},
+			#{isOpenPresell},
+			#{presellTime},
+			#{presellDay},
+			#{presellDeliveryType},
+			#{presellPrice},
+			#{goodsUnit})
+	</insert>
+
+	<update id="update" parameterType="com.platform.entity.OcGoodsEntity">
+		update oc_goods 
+		<set>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="supplierId != null">`supplier_id` = #{supplierId}, </if>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="categoryId != null">`category_id` = #{categoryId}, </if>
+			<if test="categoryId1 != null">`category_id_1` = #{categoryId1}, </if>
+			<if test="categoryId2 != null">`category_id_2` = #{categoryId2}, </if>
+			<if test="categoryId3 != null">`category_id_3` = #{categoryId3}, </if>
+			<if test="brandId != null">`brand_id` = #{brandId}, </if>
+			<if test="groupIdArray != null">`group_id_array` = #{groupIdArray}, </if>
+			<if test="promotionPrice != null">`promotion_price` = #{promotionPrice}, </if>
+			<if test="promotionType != null">`promotion_type` = #{promotionType}, </if>
+			<if test="discountId != null">`discount_id` = #{discountId}, </if>
+			<if test="festivalId != null">`festival_id` = #{festivalId}, </if>
+			<if test="goodsType != null">`goods_type` = #{goodsType}, </if>
+			<if test="marketPrice != null">`market_price` = #{marketPrice}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="supplierPrice != null">`supplier_price` = #{supplierPrice}, </if>
+			<if test="memberPrice != null">`member_price` = #{memberPrice}, </if>
+			<if test="costPrice != null">`cost_price` = #{costPrice}, </if>
+			<if test="limitmoney != null">`limitmoney` = #{limitmoney}, </if>
+			<if test="pointExchangeType != null">`point_exchange_type` = #{pointExchangeType}, </if>
+			<if test="pointExchange != null">`point_exchange` = #{pointExchange}, </if>
+			<if test="givePoint != null">`give_point` = #{givePoint}, </if>
+			<if test="isMemberDiscount != null">`is_member_discount` = #{isMemberDiscount}, </if>
+			<if test="shippingFee != null">`shipping_fee` = #{shippingFee}, </if>
+			<if test="shippingFeeId != null">`shipping_fee_id` = #{shippingFeeId}, </if>
+			<if test="stock != null">`stock` = #{stock}, </if>
+			<if test="maxBuy != null">`max_buy` = #{maxBuy}, </if>
+			<if test="clicks != null">`clicks` = #{clicks}, </if>
+			<if test="minStockAlarm != null">`min_stock_alarm` = #{minStockAlarm}, </if>
+			<if test="sales != null">`sales` = #{sales}, </if>
+			<if test="collects != null">`collects` = #{collects}, </if>
+			<if test="star != null">`star` = #{star}, </if>
+			<if test="evaluates != null">`evaluates` = #{evaluates}, </if>
+			<if test="shares != null">`shares` = #{shares}, </if>
+			<if test="provinceId != null">`province_id` = #{provinceId}, </if>
+			<if test="cityId != null">`city_id` = #{cityId}, </if>
+			<if test="districtId != null">`district_id` = #{districtId}, </if>
+			<if test="streetId != null">`street_id` = #{streetId}, </if>
+			<if test="locationplace != null">`locationplace` = #{locationplace}, </if>
+			<if test="picture != null">`picture` = #{picture}, </if>
+			<if test="keywords != null">`keywords` = #{keywords}, </if>
+			<if test="introduction != null">`introduction` = #{introduction}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="qrcode != null">`QRcode` = #{qrcode}, </if>
+			<if test="videourl != null">`videoUrl` = #{videourl}, </if>
+			<if test="code != null">`code` = #{code}, </if>
+			<if test="isStockVisible != null">`is_stock_visible` = #{isStockVisible}, </if>
+			<if test="isHot != null">`is_hot` = #{isHot}, </if>
+			<if test="isRecommend != null">`is_recommend` = #{isRecommend}, </if>
+			<if test="isNew != null">`is_new` = #{isNew}, </if>
+			<if test="isPreSale != null">`is_pre_sale` = #{isPreSale}, </if>
+			<if test="isBill != null">`is_bill` = #{isBill}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="imgIdArray != null">`img_id_array` = #{imgIdArray}, </if>
+			<if test="skuImgArray != null">`sku_img_array` = #{skuImgArray}, </if>
+			<if test="matchPoint != null">`match_point` = #{matchPoint}, </if>
+			<if test="matchRatio != null">`match_ratio` = #{matchRatio}, </if>
+			<if test="realSales != null">`real_sales` = #{realSales}, </if>
+			<if test="goodsAttributeId != null">`goods_attribute_id` = #{goodsAttributeId}, </if>
+			<if test="goodsSpecFormat != null">`goods_spec_format` = #{goodsSpecFormat}, </if>
+			<if test="goodsWeight != null">`goods_weight` = #{goodsWeight}, </if>
+			<if test="goodsVolume != null">`goods_volume` = #{goodsVolume}, </if>
+			<if test="shippingFeeType != null">`shipping_fee_type` = #{shippingFeeType}, </if>
+			<if test="extendCategoryId != null">`extend_category_id` = #{extendCategoryId}, </if>
+			<if test="extendCategoryId1 != null">`extend_category_id_1` = #{extendCategoryId1}, </if>
+			<if test="extendCategoryId2 != null">`extend_category_id_2` = #{extendCategoryId2}, </if>
+			<if test="extendCategoryId3 != null">`extend_category_id_3` = #{extendCategoryId3}, </if>
+			<if test="saleDate != null">`sale_date` = #{saleDate}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="minBuy != null">`min_buy` = #{minBuy}, </if>
+			<if test="virtualGoodsTypeId != null">`virtual_goods_type_id` = #{virtualGoodsTypeId}, </if>
+			<if test="productionDate != null">`production_date` = #{productionDate}, </if>
+			<if test="shelfLife != null">`shelf_life` = #{shelfLife}, </if>
+			<if test="goodsVideoAddress != null">`goods_video_address` = #{goodsVideoAddress}, </if>
+			<if test="maxUsePoint != null">`max_use_point` = #{maxUsePoint}, </if>
+			<if test="isOpenPresell != null">`is_open_presell` = #{isOpenPresell}, </if>
+			<if test="presellTime != null">`presell_time` = #{presellTime}, </if>
+			<if test="presellDay != null">`presell_day` = #{presellDay}, </if>
+			<if test="presellDeliveryType != null">`presell_delivery_type` = #{presellDeliveryType}, </if>
+			<if test="presellPrice != null">`presell_price` = #{presellPrice}, </if>
+			<if test="goodsUnit != null">`goods_unit` = #{goodsUnit}</if>
+		</set>
+		where goods_id = #{goodsId}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_goods where goods_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_goods where goods_id in 
+		<foreach item="goodsId" collection="array" open="(" separator="," close=")">
+			#{goodsId}
+		</foreach>
+	</delete>
+
+</mapper>

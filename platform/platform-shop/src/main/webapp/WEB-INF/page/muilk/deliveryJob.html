@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>货柜商品余量查询</title>
+#parse("sys/header.html")
+</head>
+<body>
+	<div id="containerGoodsRemainApp">
+		<div v-show="!detail&&showList">
+        <Row :gutter="16" class="header">
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.devliveryPerson" @on-enter="query" placeholder="配送员"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.containerSn" @on-enter="query" placeholder="货柜编号"/>
+                </i-col>
+                <i-col span="4">
+                    <Cascader :data="cascaderData" v-model="queryCascaderDataValue"></Cascader>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.uptownName" @on-enter="query" placeholder="小区名称"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
+        </Row>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+    
+	</div>
+<script src="${rc.contextPath}/js/muilk/deliveryJob.js?_${date.systemTime}"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单管理:待审核</title>
+    #parse("sys/header.html")
+</head>
+<style>
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 480px;
+    }
+</style>
+<body>
+<div id="pendingReviewOrder" v-cloak>
+    <div v-show="tableDivFlag">
+        <Row :gutter="16">
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.orderId" placeholder="订单号"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.customerName" placeholder="客户名"/>
+                </i-col>
+                <i-col span="4">
+                    <i-select v-model="q.status" placeholder="状态">
+                        <i-option v-for="i in statuss " :value="i.value">{{i.label}}</i-option>
+
+                    </i-select>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
+            <div class="buttons-group">
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+            </div>
+        </Row>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+    <!---->
+    <el-dialog :title="orderId" :visible.sync="dialogFormVisible" width="30%">
+        <el-card class="box-card">
+            <div class="text item">
+                商品:{{info.commodity}}
+            </div>
+            <div class="text item">
+                配送规则:每天送
+            </div>
+            <div class="text item">
+                客户:{{info.customerName}}
+            </div>
+            <div class="text item">
+                联系电话:{{info.phone}}
+            </div>
+            <div class="text item">
+                小区名:xxx小区
+            </div>
+            <div class="text item">
+                地址:{{info.address}}
+            </div>
+            <div class="text item" v-if="info.NXFlag">
+                自提柜:
+                <el-checkbox label="片区1"></el-checkbox>
+                <el-checkbox label="片区2"></el-checkbox>
+            </div>
+            <div class="text item" v-if="!info.NXFlag">
+                是否安装奶箱: <el-checkbox label="是"></el-checkbox>
+            </div>
+        </el-card>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+    </el-dialog>
+</div>
+</div>
+<script src="${rc.contextPath}/js/muilk/pendingReviewOrder.js?_${date.systemTime}"></script>
+</body>
+</html>

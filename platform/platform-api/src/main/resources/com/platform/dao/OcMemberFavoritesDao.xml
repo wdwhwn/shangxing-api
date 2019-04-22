@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcMemberFavoritesDao">
+
+    <resultMap type="com.platform.entity.OcMemberFavoritesEntity" id="ocMemberFavoritesMap">
+        <result property="id" column="id"/>
+        <result property="mid" column="mid"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="favType" column="fav_type"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopLogo" column="shop_logo"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="imgIdArray" column="img_id_array"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="favMsg" column="fav_msg"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.OcMemberFavoritesEntity">
+		select
+			`id`,
+			`mid`,
+			`goods_id`,
+			`fav_type`,
+			`shop_id`,
+			`shop_name`,
+			`shop_logo`,
+			`goods_name`,
+			`img_id_array`,
+			`goods_price`,
+			`fav_msg`,
+			`create_time`
+		from oc_member_favorites
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.OcMemberFavoritesEntity">
+		select
+    		`id`,
+    		`mid`,
+    		`goods_id`,
+    		`fav_type`,
+    		`shop_id`,
+    		`shop_name`,
+    		`shop_logo`,
+    		`goods_name`,
+    		`img_id_array`,
+    		`goods_price`,
+    		`fav_msg`,
+    		`create_time`
+		from oc_member_favorites
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+		<if test=" mid != null ">
+			AND mid =#{mid}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_member_favorites
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+		<if test=" mid != null ">
+			AND mid =#{mid}
+		</if>
+	</select>
+
+	 <!--加入收藏-->
+	<insert id="save" parameterType="com.platform.entity.OcMemberFavoritesEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into oc_member_favorites(
+			`mid`,
+			`goods_id`,
+			`fav_type`,
+			`shop_id`,
+			`shop_name`,
+			`shop_logo`,
+			`goods_name`,
+			`img_id_array`,
+			`goods_price`,
+			`fav_msg`,
+			`create_time`)
+		values(
+			#{mid},
+			#{goodsId},
+			#{favType},
+			#{shopId},
+			#{shopName},
+			#{shopLogo},
+			#{goodsName},
+			#{imgIdArray},
+			#{goodsPrice},
+			#{favMsg},
+			#{createTime})
+	</insert>
+
+	<update id="update" parameterType="com.platform.entity.OcMemberFavoritesEntity">
+		update oc_member_favorites 
+		<set>
+			<if test="mid != null">`mid` = #{mid}, </if>
+			<if test="goodsId != null">`goods_id` = #{goodsId}, </if>
+			<if test="favType != null">`fav_type` = #{favType}, </if>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="shopName != null">`shop_name` = #{shopName}, </if>
+			<if test="shopLogo != null">`shop_logo` = #{shopLogo}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="imgIdArray != null">`img_id_array` = #{imgIdArray}, </if>
+			<if test="goodsPrice != null">`goods_price` = #{goodsPrice}, </if>
+			<if test="favMsg != null">`fav_msg` = #{favMsg}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_member_favorites where id = #{value}
+	</delete>
+
+<!--删除收藏的商品-->
+	<delete id="deleteByGoodsId">
+		delete from oc_member_favorites where goods_id = #{goodsId}
+	</delete>
+
+	<!--删除收藏的店铺-->
+	<delete id="deleteByShopId">
+		delete from oc_member_favorites where shop_id = #{shopId} and fav_type='shop'
+	</delete>
+
+	<delete id="deleteBatch">
+		delete from oc_member_favorites where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

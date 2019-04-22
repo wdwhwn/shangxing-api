@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/platform/platform.iml" filepath="$PROJECT_DIR$/platform/platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-admin/platform-admin.iml" filepath="$PROJECT_DIR$/platform/platform-admin/platform-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-api/platform-api.iml" filepath="$PROJECT_DIR$/platform/platform-api/platform-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-common/platform-common.iml" filepath="$PROJECT_DIR$/platform/platform-common/platform-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-framework/platform-framework.iml" filepath="$PROJECT_DIR$/platform/platform-framework/platform-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-gen/platform-gen.iml" filepath="$PROJECT_DIR$/platform/platform-gen/platform-gen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-mp/platform-mp.iml" filepath="$PROJECT_DIR$/platform/platform-mp/platform-mp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-schedule/platform-schedule.iml" filepath="$PROJECT_DIR$/platform/platform-schedule/platform-schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-shop/platform-shop.iml" filepath="$PROJECT_DIR$/platform/platform-shop/platform-shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/shangxing-api.iml" filepath="$PROJECT_DIR$/.idea/shangxing-api.iml" />
+    </modules>
+  </component>
+</project>

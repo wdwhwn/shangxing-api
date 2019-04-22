@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcMemberDao">
+
+    <resultMap type="com.platform.entity.OcMemberEntity" id="ocMemberMap">
+        <result property="mid" column="mid"/>
+        <result property="tid" column="tid"/>
+        <result property="pid" column="pid"/>
+        <result property="mobile" column="mobile"/>
+        <result property="invitecode" column="invitecode"/>
+        <result property="token" column="token"/>
+        <result property="password" column="password"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="username" column="username"/>
+        <result property="realname" column="realname"/>
+        <result property="miniopenid" column="miniopenid"/>
+        <result property="memberLevel" column="member_level"/>
+        <result property="levelId" column="level_id"/>
+        <result property="levelName" column="level_name"/>
+        <result property="profit" column="profit"/>
+        <result property="money" column="money"/>
+        <result property="memo" column="memo"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="districtId" column="district_id"/>
+        <result property="locationplace" column="locationplace"/>
+        <result property="town" column="town"/>
+        <result property="village" column="village"/>
+        <result property="point" column="point"/>
+        <result property="headUrl" column="head_url"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="sexCn" column="sex_cn"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+        <result property="qq" column="qq"/>
+        <result property="unionid" column="unionid"/>
+        <result property="nickname" column="nickname"/>
+        <result property="accessToken" column="access_token"/>
+        <result property="headimgurl" column="headimgurl"/>
+    </resultMap>
+	<!--用户详情-->
+	<select id="selectOneByToken" resultMap="ocMemberMap">
+			select
+			`mid`,
+			`tid`,
+			`pid`,
+			`mobile`,
+			`invitecode`,
+			`token`,
+			`password`,
+			`shop_id`,
+			`username`,
+			`realname`,
+			`miniopenid`,
+			`member_level`,
+			`level_id`,
+			`level_name`,
+			`profit`,
+			`money`,
+			`memo`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`town`,
+			`village`,
+			`point`,
+			`head_url`,
+			`email`,
+			`sex`,
+			`sex_cn`,
+			`create_time`,
+			`update_time`,
+			`status`,
+			`qq`,
+			`unionid`,
+			`nickname`,
+			`access_token`,
+			`headimgurl`
+		from oc_member
+		where token = #{token}
+	</select>
+	<!--密码登录-->
+	<select id="selectOneByMP" resultMap="ocMemberMap">
+			select
+			`mid`,
+			`tid`,
+			`pid`,
+			`mobile`,
+			`invitecode`,
+			`token`,
+			`password`,
+			`shop_id`,
+			`username`,
+			`realname`,
+			`miniopenid`,
+			`member_level`,
+			`level_id`,
+			`level_name`,
+			`profit`,
+			`money`,
+			`memo`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`town`,
+			`village`,
+			`point`,
+			`head_url`,
+			`email`,
+			`sex`,
+			`sex_cn`,
+			`create_time`,
+			`update_time`,
+			`status`,
+			`qq`,
+			`unionid`,
+			`nickname`,
+			`access_token`,
+			`headimgurl`
+		from oc_member
+		where mobile = #{mobile} and password=#{password}
+	</select>
+	<!--短信登录-->
+	<select id="selectOneByMobile" resultMap="ocMemberMap">
+		select
+		`mid`,
+		`tid`,
+		`pid`,
+		`mobile`,
+		`invitecode`,
+		`token`,
+		`password`,
+		`shop_id`,
+		`username`,
+		`realname`,
+		`miniopenid`,
+		`member_level`,
+		`level_id`,
+		`level_name`,
+		`profit`,
+		`money`,
+		`memo`,
+		`province_id`,
+		`city_id`,
+		`district_id`,
+		`locationplace`,
+		`town`,
+		`village`,
+		`point`,
+		`head_url`,
+		`email`,
+		`sex`,
+		`sex_cn`,
+		`create_time`,
+		`update_time`,
+		`status`,
+		`qq`,
+		`unionid`,
+		`nickname`,
+		`access_token`,
+		`headimgurl`
+		from oc_member
+		where mobile = #{mobile}
+	</select>
+	<select id="queryObject" resultType="com.platform.entity.OcMemberEntity">
+		select
+			`mid`,
+			`tid`,
+			`pid`,
+			`mobile`,
+			`invitecode`,
+			`token`,
+			`password`,
+			`shop_id`,
+			`username`,
+			`realname`,
+			`miniopenid`,
+			`member_level`,
+			`level_id`,
+			`level_name`,
+			`profit`,
+			`money`,
+			`memo`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`town`,
+			`village`,
+			`point`,
+			`head_url`,
+			`email`,
+			`sex`,
+			`sex_cn`,
+			`create_time`,
+			`update_time`,
+			`status`,
+			`qq`,
+			`unionid`,
+			`nickname`,
+			`access_token`,
+			`headimgurl`
+		from oc_member
+		where mid = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.OcMemberEntity">
+		select
+    		`mid`,
+    		`tid`,
+    		`pid`,
+    		`mobile`,
+    		`invitecode`,
+    		`token`,
+    		`password`,
+    		`shop_id`,
+    		`username`,
+    		`realname`,
+    		`miniopenid`,
+    		`member_level`,
+    		`level_id`,
+    		`level_name`,
+    		`profit`,
+    		`money`,
+    		`memo`,
+    		`province_id`,
+    		`city_id`,
+    		`district_id`,
+    		`locationplace`,
+    		`town`,
+    		`village`,
+    		`point`,
+    		`head_url`,
+    		`email`,
+    		`sex`,
+    		`sex_cn`,
+    		`create_time`,
+    		`update_time`,
+    		`status`,
+    		`qq`,
+    		`unionid`,
+    		`nickname`,
+    		`access_token`,
+    		`headimgurl`
+		from oc_member
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by mid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_member
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 <!--用户注册-->
+	<insert id="save" parameterType="com.platform.entity.OcMemberEntity" useGeneratedKeys="true" keyProperty="mid">
+		insert into oc_member(
+			`tid`,
+			`pid`,
+			`mobile`,
+			`invitecode`,
+			`token`,
+			`password`,
+			`shop_id`,
+			`username`,
+			`realname`,
+			`miniopenid`,
+			`member_level`,
+			`level_id`,
+			`level_name`,
+			`profit`,
+			`money`,
+			`memo`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`town`,
+			`village`,
+			`point`,
+			`head_url`,
+			`email`,
+			`sex`,
+			`sex_cn`,
+			`create_time`,
+			`update_time`,
+			`status`,
+			`qq`,
+			`unionid`,
+			`nickname`,
+			`access_token`,
+			`headimgurl`)
+		values(
+			#{tid},
+			#{pid},
+			#{mobile},
+			#{invitecode},
+			#{token},
+			#{password},
+			#{shopId},
+			#{username},
+			#{realname},
+			#{miniopenid},
+			#{memberLevel},
+			#{levelId},
+			#{levelName},
+			#{profit},
+			#{money},
+			#{memo},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{locationplace},
+			#{town},
+			#{village},
+			#{point},
+			#{headUrl},
+			#{email},
+			#{sex},
+			#{sexCn},
+			#{createTime},
+			#{updateTime},
+			#{status},
+			#{qq},
+			#{unionid},
+			#{nickname},
+			#{accessToken},
+			#{headimgurl})
+	</insert>
+	 <!--更新用户-->
+	<update id="update" parameterType="com.platform.entity.OcMemberEntity">
+		update oc_member 
+		<set>
+			<if test="tid != null">`tid` = #{tid}, </if>
+			<if test="pid != null">`pid` = #{pid}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="invitecode != null">`invitecode` = #{invitecode}, </if>
+			<if test="token != null">`token` = #{token}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="realname != null">`realname` = #{realname}, </if>
+			<if test="miniopenid != null">`miniopenid` = #{miniopenid}, </if>
+			<if test="memberLevel != null">`member_level` = #{memberLevel}, </if>
+			<if test="levelId != null">`level_id` = #{levelId}, </if>
+			<if test="levelName != null">`level_name` = #{levelName}, </if>
+			<if test="profit != null">`profit` = #{profit}, </if>
+			<if test="money != null">`money` = #{money}, </if>
+			<if test="memo != null">`memo` = #{memo}, </if>
+			<if test="provinceId != null">`province_id` = #{provinceId}, </if>
+			<if test="cityId != null">`city_id` = #{cityId}, </if>
+			<if test="districtId != null">`district_id` = #{districtId}, </if>
+			<if test="locationplace != null">`locationplace` = #{locationplace}, </if>
+			<if test="town != null">`town` = #{town}, </if>
+			<if test="village != null">`village` = #{village}, </if>
+			<if test="point != null">`point` = #{point}, </if>
+			<if test="headUrl != null">`head_url` = #{headUrl}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="sexCn != null">`sex_cn` = #{sexCn}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="qq != null">`qq` = #{qq}, </if>
+			<if test="unionid != null">`unionid` = #{unionid}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="accessToken != null">`access_token` = #{accessToken}, </if>
+			<if test="headimgurl != null">`headimgurl` = #{headimgurl}</if>
+		</set>
+		where mid = #{mid}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_member where mid = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_member where mid in 
+		<foreach item="mid" collection="array" open="(" separator="," close=")">
+			#{mid}
+		</foreach>
+	</delete>
+
+</mapper>

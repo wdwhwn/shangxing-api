@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcShopDao">
+
+    <resultMap type="com.platform.entity.OcShopEntity" id="ocShopMap">
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopType" column="shop_type"/>
+        <result property="mid" column="mid"/>
+        <result property="shopGroupId" column="shop_group_id"/>
+        <result property="shopCompanyName" column="shop_company_name"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="districtId" column="district_id"/>
+        <result property="locationplace" column="locationplace"/>
+        <result property="shopAddress" column="shop_address"/>
+        <result property="shopZip" column="shop_zip"/>
+        <result property="shopState" column="shop_state"/>
+        <result property="shopCloseInfo" column="shop_close_info"/>
+        <result property="shopSort" column="shop_sort"/>
+        <result property="shopLogo" column="shop_logo"/>
+        <result property="shopBanner" column="shop_banner"/>
+        <result property="shopAvatar" column="shop_avatar"/>
+        <result property="shopKeywords" column="shop_keywords"/>
+        <result property="shopDescription" column="shop_description"/>
+        <result property="shopQq" column="shop_qq"/>
+        <result property="shopWw" column="shop_ww"/>
+        <result property="shopPhone" column="shop_phone"/>
+        <result property="shopDomain" column="shop_domain"/>
+        <result property="shopDomainTimes" column="shop_domain_times"/>
+        <result property="shopRecommend" column="shop_recommend"/>
+        <result property="shopCredit" column="shop_credit"/>
+        <result property="shopDesccredit" column="shop_desccredit"/>
+        <result property="shopServicecredit" column="shop_servicecredit"/>
+        <result property="shopDeliverycredit" column="shop_deliverycredit"/>
+        <result property="shopCollect" column="shop_collect"/>
+        <result property="shopStamp" column="shop_stamp"/>
+        <result property="shopPrintdesc" column="shop_printdesc"/>
+        <result property="shopSales" column="shop_sales"/>
+        <result property="shopAccount" column="shop_account"/>
+        <result property="shopCash" column="shop_cash"/>
+        <result property="shopWorkingtime" column="shop_workingtime"/>
+        <result property="liveStoreName" column="live_store_name"/>
+        <result property="liveStoreAddress" column="live_store_address"/>
+        <result property="liveStoreTel" column="live_store_tel"/>
+        <result property="liveStoreBus" column="live_store_bus"/>
+        <result property="shopVrcodePrefix" column="shop_vrcode_prefix"/>
+        <result property="storeQtian" column="store_qtian"/>
+        <result property="shopZhping" column="shop_zhping"/>
+        <result property="shopErxiaoshi" column="shop_erxiaoshi"/>
+        <result property="shopTuihuo" column="shop_tuihuo"/>
+        <result property="shopShiyong" column="shop_shiyong"/>
+        <result property="shopShiti" column="shop_shiti"/>
+        <result property="shopXiaoxie" column="shop_xiaoxie"/>
+        <result property="shopHuodaofk" column="shop_huodaofk"/>
+        <result property="shopFreeTime" column="shop_free_time"/>
+        <result property="shopRegion" column="shop_region"/>
+        <result property="recommendUid" column="recommend_uid"/>
+        <result property="shopQrcode" column="shop_qrcode"/>
+        <result property="shopCreateTime" column="shop_create_time"/>
+        <result property="shopEndTime" column="shop_end_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObjectByGoodsId" resultType="com.platform.entity.OcShopEntity">
+		select
+		`shop_id`,
+		`shop_name`,
+		`shop_type`,
+		`mid`,
+		`shop_group_id`,
+		`shop_company_name`,
+		`province_id`,
+		`city_id`,
+		`district_id`,
+		`locationplace`,
+		`shop_address`,
+		`shop_zip`,
+		`shop_state`,
+		`shop_close_info`,
+		`shop_sort`,
+		`shop_logo`,
+		`shop_banner`,
+		`shop_avatar`,
+		`shop_keywords`,
+		`shop_description`,
+		`shop_qq`,
+		`shop_ww`,
+		`shop_phone`,
+		`shop_domain`,
+		`shop_domain_times`,
+		`shop_recommend`,
+		`shop_credit`,
+		`shop_desccredit`,
+		`shop_servicecredit`,
+		`shop_deliverycredit`,
+		`shop_collect`,
+		`shop_stamp`,
+		`shop_printdesc`,
+		`shop_sales`,
+		`shop_account`,
+		`shop_cash`,
+		`shop_workingtime`,
+		`live_store_name`,
+		`live_store_address`,
+		`live_store_tel`,
+		`live_store_bus`,
+		`shop_vrcode_prefix`,
+		`store_qtian`,
+		`shop_zhping`,
+		`shop_erxiaoshi`,
+		`shop_tuihuo`,
+		`shop_shiyong`,
+		`shop_shiti`,
+		`shop_xiaoxie`,
+		`shop_huodaofk`,
+		`shop_free_time`,
+		`shop_region`,
+		`recommend_uid`,
+		`shop_qrcode`,
+		`shop_create_time`,
+		`shop_end_time`,
+		`create_time`,
+		`update_time`
+		from oc_shop
+		where shop_id= #{id}
+	</select>
+	<select id="queryObject" resultType="com.platform.entity.OcShopEntity">
+		select
+			`shop_id`,
+			`shop_name`,
+			`shop_type`,
+			`mid`,
+			`shop_group_id`,
+			`shop_company_name`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`shop_address`,
+			`shop_zip`,
+			`shop_state`,
+			`shop_close_info`,
+			`shop_sort`,
+			`shop_logo`,
+			`shop_banner`,
+			`shop_avatar`,
+			`shop_keywords`,
+			`shop_description`,
+			`shop_qq`,
+			`shop_ww`,
+			`shop_phone`,
+			`shop_domain`,
+			`shop_domain_times`,
+			`shop_recommend`,
+			`shop_credit`,
+			`shop_desccredit`,
+			`shop_servicecredit`,
+			`shop_deliverycredit`,
+			`shop_collect`,
+			`shop_stamp`,
+			`shop_printdesc`,
+			`shop_sales`,
+			`shop_account`,
+			`shop_cash`,
+			`shop_workingtime`,
+			`live_store_name`,
+			`live_store_address`,
+			`live_store_tel`,
+			`live_store_bus`,
+			`shop_vrcode_prefix`,
+			`store_qtian`,
+			`shop_zhping`,
+			`shop_erxiaoshi`,
+			`shop_tuihuo`,
+			`shop_shiyong`,
+			`shop_shiti`,
+			`shop_xiaoxie`,
+			`shop_huodaofk`,
+			`shop_free_time`,
+			`shop_region`,
+			`recommend_uid`,
+			`shop_qrcode`,
+			`shop_create_time`,
+			`shop_end_time`,
+			`create_time`,
+			`update_time`
+		from oc_shop
+		where shop_id = #{id}
+	</select>
+	<select id="queryList" resultType="com.platform.entity.OcShopEntity">
+		select
+    		`shop_id`,
+    		`shop_name`,
+    		`shop_type`,
+    		`mid`,
+    		`shop_group_id`,
+    		`shop_company_name`,
+    		`province_id`,
+    		`city_id`,
+    		`district_id`,
+    		`locationplace`,
+    		`shop_address`,
+    		`shop_zip`,
+    		`shop_state`,
+    		`shop_close_info`,
+    		`shop_sort`,
+    		`shop_logo`,
+    		`shop_banner`,
+    		`shop_avatar`,
+    		`shop_keywords`,
+    		`shop_description`,
+    		`shop_qq`,
+    		`shop_ww`,
+    		`shop_phone`,
+    		`shop_domain`,
+    		`shop_domain_times`,
+    		`shop_recommend`,
+    		`shop_credit`,
+    		`shop_desccredit`,
+    		`shop_servicecredit`,
+    		`shop_deliverycredit`,
+    		`shop_collect`,
+    		`shop_stamp`,
+    		`shop_printdesc`,
+    		`shop_sales`,
+    		`shop_account`,
+    		`shop_cash`,
+    		`shop_workingtime`,
+    		`live_store_name`,
+    		`live_store_address`,
+    		`live_store_tel`,
+    		`live_store_bus`,
+    		`shop_vrcode_prefix`,
+    		`store_qtian`,
+    		`shop_zhping`,
+    		`shop_erxiaoshi`,
+    		`shop_tuihuo`,
+    		`shop_shiyong`,
+    		`shop_shiti`,
+    		`shop_xiaoxie`,
+    		`shop_huodaofk`,
+    		`shop_free_time`,
+    		`shop_region`,
+    		`recommend_uid`,
+    		`shop_qrcode`,
+    		`shop_create_time`,
+    		`shop_end_time`,
+    		`create_time`,
+    		`update_time`
+		from oc_shop
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by shop_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_shop
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.OcShopEntity" useGeneratedKeys="true" keyProperty="shopId">
+		insert into oc_shop(
+			`shop_name`,
+			`shop_type`,
+			`mid`,
+			`shop_group_id`,
+			`shop_company_name`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`shop_address`,
+			`shop_zip`,
+			`shop_state`,
+			`shop_close_info`,
+			`shop_sort`,
+			`shop_logo`,
+			`shop_banner`,
+			`shop_avatar`,
+			`shop_keywords`,
+			`shop_description`,
+			`shop_qq`,
+			`shop_ww`,
+			`shop_phone`,
+			`shop_domain`,
+			`shop_domain_times`,
+			`shop_recommend`,
+			`shop_credit`,
+			`shop_desccredit`,
+			`shop_servicecredit`,
+			`shop_deliverycredit`,
+			`shop_collect`,
+			`shop_stamp`,
+			`shop_printdesc`,
+			`shop_sales`,
+			`shop_account`,
+			`shop_cash`,
+			`shop_workingtime`,
+			`live_store_name`,
+			`live_store_address`,
+			`live_store_tel`,
+			`live_store_bus`,
+			`shop_vrcode_prefix`,
+			`store_qtian`,
+			`shop_zhping`,
+			`shop_erxiaoshi`,
+			`shop_tuihuo`,
+			`shop_shiyong`,
+			`shop_shiti`,
+			`shop_xiaoxie`,
+			`shop_huodaofk`,
+			`shop_free_time`,
+			`shop_region`,
+			`recommend_uid`,
+			`shop_qrcode`,
+			`shop_create_time`,
+			`shop_end_time`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{shopName},
+			#{shopType},
+			#{mid},
+			#{shopGroupId},
+			#{shopCompanyName},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{locationplace},
+			#{shopAddress},
+			#{shopZip},
+			#{shopState},
+			#{shopCloseInfo},
+			#{shopSort},
+			#{shopLogo},
+			#{shopBanner},
+			#{shopAvatar},
+			#{shopKeywords},
+			#{shopDescription},
+			#{shopQq},
+			#{shopWw},
+			#{shopPhone},
+			#{shopDomain},
+			#{shopDomainTimes},
+			#{shopRecommend},
+			#{shopCredit},
+			#{shopDesccredit},
+			#{shopServicecredit},
+			#{shopDeliverycredit},
+			#{shopCollect},
+			#{shopStamp},
+			#{shopPrintdesc},
+			#{shopSales},
+			#{shopAccount},
+			#{shopCash},
+			#{shopWorkingtime},
+			#{liveStoreName},
+			#{liveStoreAddress},
+			#{liveStoreTel},
+			#{liveStoreBus},
+			#{shopVrcodePrefix},
+			#{storeQtian},
+			#{shopZhping},
+			#{shopErxiaoshi},
+			#{shopTuihuo},
+			#{shopShiyong},
+			#{shopShiti},
+			#{shopXiaoxie},
+			#{shopHuodaofk},
+			#{shopFreeTime},
+			#{shopRegion},
+			#{recommendUid},
+			#{shopQrcode},
+			#{shopCreateTime},
+			#{shopEndTime},
+			#{createTime},
+			#{updateTime})
+	</insert>
+	 <!--更新店招-->
+	<update id="update" parameterType="com.platform.entity.OcShopEntity">
+		update oc_shop 
+		<set>
+			<if test="shopName != null">`shop_name` = #{shopName}, </if>
+			<if test="shopType != null">`shop_type` = #{shopType}, </if>
+			<if test="mid != null">`mid` = #{mid}, </if>
+			<if test="shopGroupId != null">`shop_group_id` = #{shopGroupId}, </if>
+			<if test="shopCompanyName != null">`shop_company_name` = #{shopCompanyName}, </if>
+			<if test="provinceId != null">`province_id` = #{provinceId}, </if>
+			<if test="cityId != null">`city_id` = #{cityId}, </if>
+			<if test="districtId != null">`district_id` = #{districtId}, </if>
+			<if test="locationplace != null">`locationplace` = #{locationplace}, </if>
+			<if test="shopAddress != null">`shop_address` = #{shopAddress}, </if>
+			<if test="shopZip != null">`shop_zip` = #{shopZip}, </if>
+			<if test="shopState != null">`shop_state` = #{shopState}, </if>
+			<if test="shopCloseInfo != null">`shop_close_info` = #{shopCloseInfo}, </if>
+			<if test="shopSort != null">`shop_sort` = #{shopSort}, </if>
+			<if test="shopLogo != null">`shop_logo` = #{shopLogo}, </if>
+			<if test="shopBanner != null">`shop_banner` = #{shopBanner}, </if>
+			<if test="shopAvatar != null">`shop_avatar` = #{shopAvatar}, </if>
+			<if test="shopKeywords != null">`shop_keywords` = #{shopKeywords}, </if>
+			<if test="shopDescription != null">`shop_description` = #{shopDescription}, </if>
+			<if test="shopQq != null">`shop_qq` = #{shopQq}, </if>
+			<if test="shopWw != null">`shop_ww` = #{shopWw}, </if>
+			<if test="shopPhone != null">`shop_phone` = #{shopPhone}, </if>
+			<if test="shopDomain != null">`shop_domain` = #{shopDomain}, </if>
+			<if test="shopDomainTimes != null">`shop_domain_times` = #{shopDomainTimes}, </if>
+			<if test="shopRecommend != null">`shop_recommend` = #{shopRecommend}, </if>
+			<if test="shopCredit != null">`shop_credit` = #{shopCredit}, </if>
+			<if test="shopDesccredit != null">`shop_desccredit` = #{shopDesccredit}, </if>
+			<if test="shopServicecredit != null">`shop_servicecredit` = #{shopServicecredit}, </if>
+			<if test="shopDeliverycredit != null">`shop_deliverycredit` = #{shopDeliverycredit}, </if>
+			<if test="shopCollect != null">`shop_collect` = #{shopCollect}, </if>
+			<if test="shopStamp != null">`shop_stamp` = #{shopStamp}, </if>
+			<if test="shopPrintdesc != null">`shop_printdesc` = #{shopPrintdesc}, </if>
+			<if test="shopSales != null">`shop_sales` = #{shopSales}, </if>
+			<if test="shopAccount != null">`shop_account` = #{shopAccount}, </if>
+			<if test="shopCash != null">`shop_cash` = #{shopCash}, </if>
+			<if test="shopWorkingtime != null">`shop_workingtime` = #{shopWorkingtime}, </if>
+			<if test="liveStoreName != null">`live_store_name` = #{liveStoreName}, </if>
+			<if test="liveStoreAddress != null">`live_store_address` = #{liveStoreAddress}, </if>
+			<if test="liveStoreTel != null">`live_store_tel` = #{liveStoreTel}, </if>
+			<if test="liveStoreBus != null">`live_store_bus` = #{liveStoreBus}, </if>
+			<if test="shopVrcodePrefix != null">`shop_vrcode_prefix` = #{shopVrcodePrefix}, </if>
+			<if test="storeQtian != null">`store_qtian` = #{storeQtian}, </if>
+			<if test="shopZhping != null">`shop_zhping` = #{shopZhping}, </if>
+			<if test="shopErxiaoshi != null">`shop_erxiaoshi` = #{shopErxiaoshi}, </if>
+			<if test="shopTuihuo != null">`shop_tuihuo` = #{shopTuihuo}, </if>
+			<if test="shopShiyong != null">`shop_shiyong` = #{shopShiyong}, </if>
+			<if test="shopShiti != null">`shop_shiti` = #{shopShiti}, </if>
+			<if test="shopXiaoxie != null">`shop_xiaoxie` = #{shopXiaoxie}, </if>
+			<if test="shopHuodaofk != null">`shop_huodaofk` = #{shopHuodaofk}, </if>
+			<if test="shopFreeTime != null">`shop_free_time` = #{shopFreeTime}, </if>
+			<if test="shopRegion != null">`shop_region` = #{shopRegion}, </if>
+			<if test="recommendUid != null">`recommend_uid` = #{recommendUid}, </if>
+			<if test="shopQrcode != null">`shop_qrcode` = #{shopQrcode}, </if>
+			<if test="shopCreateTime != null">`shop_create_time` = #{shopCreateTime}, </if>
+			<if test="shopEndTime != null">`shop_end_time` = #{shopEndTime}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where shop_id = #{shopId}
+	</update>
+<!--通过mid，查询shop-->
+	<select id="queryObjectByMid" resultType="com.platform.entity.OcShopEntity">
+		select
+		`shop_id`,
+		`shop_name`,
+		`shop_type`,
+		`mid`,
+		`shop_group_id`,
+		`shop_company_name`,
+		`province_id`,
+		`city_id`,
+		`district_id`,
+		`locationplace`,
+		`shop_address`,
+		`shop_zip`,
+		`shop_state`,
+		`shop_close_info`,
+		`shop_sort`,
+		`shop_logo`,
+		`shop_banner`,
+		`shop_avatar`,
+		`shop_keywords`,
+		`shop_description`,
+		`shop_qq`,
+		`shop_ww`,
+		`shop_phone`,
+		`shop_domain`,
+		`shop_domain_times`,
+		`shop_recommend`,
+		`shop_credit`,
+		`shop_desccredit`,
+		`shop_servicecredit`,
+		`shop_deliverycredit`,
+		`shop_collect`,
+		`shop_stamp`,
+		`shop_printdesc`,
+		`shop_sales`,
+		`shop_account`,
+		`shop_cash`,
+		`shop_workingtime`,
+		`live_store_name`,
+		`live_store_address`,
+		`live_store_tel`,
+		`live_store_bus`,
+		`shop_vrcode_prefix`,
+		`store_qtian`,
+		`shop_zhping`,
+		`shop_erxiaoshi`,
+		`shop_tuihuo`,
+		`shop_shiyong`,
+		`shop_shiti`,
+		`shop_xiaoxie`,
+		`shop_huodaofk`,
+		`shop_free_time`,
+		`shop_region`,
+		`recommend_uid`,
+		`shop_qrcode`,
+		`shop_create_time`,
+		`shop_end_time`,
+		`create_time`,
+		`update_time`
+		from oc_shop
+		where mid = #{mid}
+	</select>
+
+
+	<delete id="delete">
+		delete from oc_shop where shop_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_shop where shop_id in 
+		<foreach item="shopId" collection="array" open="(" separator="," close=")">
+			#{shopId}
+		</foreach>
+	</delete>
+
+</mapper>

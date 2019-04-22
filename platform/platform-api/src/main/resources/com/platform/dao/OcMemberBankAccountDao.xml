@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcMemberBankAccountDao">
+
+    <resultMap type="com.platform.entity.OcMemberBankAccountEntity" id="ocMemberBankAccountMap">
+        <result property="id" column="id"/>
+        <result property="mid" column="mid"/>
+        <result property="branchBankName" column="branch_bank_name"/>
+        <result property="realname" column="realname"/>
+        <result property="accountNumber" column="account_number"/>
+        <result property="mobile" column="mobile"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="accountType" column="account_type"/>
+        <result property="accountTypeName" column="account_type_name"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.OcMemberBankAccountEntity">
+		select
+			`id`,
+			`mid`,
+			`branch_bank_name`,
+			`realname`,
+			`account_number`,
+			`mobile`,
+			`is_default`,
+			`create_time`,
+			`update_time`,
+			`account_type`,
+			`account_type_name`
+		from oc_member_bank_account
+		where id = #{id}
+	</select>
+
+<!--提现账号-->
+	<select id="queryList" resultType="com.platform.entity.OcMemberBankAccountEntity">
+		select
+    		`id`,
+    		`mid`,
+    		`branch_bank_name`,
+    		`realname`,
+    		`account_number`,
+    		`mobile`,
+    		`is_default`,
+    		`create_time`,
+    		`update_time`,
+    		`account_type`,
+    		`account_type_name`
+		from oc_member_bank_account
+		WHERE 1=1
+		<if test="mid != null and mid.trim() != ''">
+			AND mid =#{mid}
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_member_bank_account
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.OcMemberBankAccountEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into oc_member_bank_account(
+			`mid`,
+			`branch_bank_name`,
+			`realname`,
+			`account_number`,
+			`mobile`,
+			`is_default`,
+			`create_time`,
+			`update_time`,
+			`account_type`,
+			`account_type_name`)
+		values(
+			#{mid},
+			#{branchBankName},
+			#{realname},
+			#{accountNumber},
+			#{mobile},
+			#{isDefault},
+			#{createTime},
+			#{updateTime},
+			#{accountType},
+			#{accountTypeName})
+	</insert>
+	 <!--账号更新-->
+	<update id="update" parameterType="com.platform.entity.OcMemberBankAccountEntity">
+		update oc_member_bank_account 
+		<set>
+			<if test="mid != null">`mid` = #{mid}, </if>
+			<if test="branchBankName != null">`branch_bank_name` = #{branchBankName}, </if>
+			<if test="realname != null">`realname` = #{realname}, </if>
+			<if test="accountNumber != null">`account_number` = #{accountNumber}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="isDefault != null">`is_default` = #{isDefault}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="accountType != null">`account_type` = #{accountType}, </if>
+			<if test="accountTypeName != null">`account_type_name` = #{accountTypeName}</if>
+		</set>
+		where id = #{id}
+	</update>
+	<!--当前id设为默认-->
+	<update id="updateToDefault" parameterType="com.platform.entity.OcMemberBankAccountEntity">
+		update oc_member_bank_account
+		<set>
+			<if test="isDefault != null">`is_default` = 0, </if>
+		</set>
+		where id = #{id}
+	</update>
+	<!--当前用户所有账号设为非默认-->
+	<update id="updateToNoDefault" parameterType="com.platform.entity.OcMemberBankAccountEntity">
+		update oc_member_bank_account
+		<set>
+			<if test="isDefault != null">`is_default` = 1, </if>
+		</set>
+		where mid = #{mid}
+	</update>
+	<delete id="delete">
+		delete from oc_member_bank_account where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_member_bank_account where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

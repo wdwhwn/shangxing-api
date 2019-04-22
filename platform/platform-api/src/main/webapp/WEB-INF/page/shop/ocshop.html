@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>店铺数据表</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+        <Row :gutter="16">
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+                <i-button @click="reloadSearch">重置</i-button>
+            </div>
+            <div class="buttons-group">
+                #if($shiro.hasPermission("ocshop:save"))
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+                #end
+                #if($shiro.hasPermission("ocshop:update"))
+                <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
+                #end
+                #if($shiro.hasPermission("ocshop:delete"))
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                #end
+            </div>
+        </Row>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+
+    <Card v-show="!showList">
+        <p slot="title">{{title}}</p>
+		<i-form ref="formValidate" :model="ocShop" :rules="ruleValidate" :label-width="80">
+            <Form-item label="店铺名称" prop="shopName">
+                <i-input v-model="ocShop.shopName" placeholder="店铺名称"/>
+            </Form-item>
+            <Form-item label="店铺类型等级" prop="shopType">
+                <i-input v-model="ocShop.shopType" placeholder="店铺类型等级"/>
+            </Form-item>
+            <Form-item label="会员id" prop="mid">
+                <i-input v-model="ocShop.mid" placeholder="会员id"/>
+            </Form-item>
+            <Form-item label="店铺分类" prop="shopGroupId">
+                <i-input v-model="ocShop.shopGroupId" placeholder="店铺分类"/>
+            </Form-item>
+            <Form-item label="店铺公司名称" prop="shopCompanyName">
+                <i-input v-model="ocShop.shopCompanyName" placeholder="店铺公司名称"/>
+            </Form-item>
+            <Form-item label="所在省ID" prop="provinceId">
+                <i-input v-model="ocShop.provinceId" placeholder="所在省ID"/>
+            </Form-item>
+            <Form-item label="所在城市ID" prop="cityId">
+                <i-input v-model="ocShop.cityId" placeholder="所在城市ID"/>
+            </Form-item>
+            <Form-item label="所在区ID" prop="districtId">
+                <i-input v-model="ocShop.districtId" placeholder="所在区ID"/>
+            </Form-item>
+            <Form-item label="省市区" prop="locationplace">
+                <i-input v-model="ocShop.locationplace" placeholder="省市区"/>
+            </Form-item>
+            <Form-item label="详细地区" prop="shopAddress">
+                <i-input v-model="ocShop.shopAddress" placeholder="详细地区"/>
+            </Form-item>
+            <Form-item label="邮政编码" prop="shopZip">
+                <i-input v-model="ocShop.shopZip" placeholder="邮政编码"/>
+            </Form-item>
+            <Form-item label="店铺状态，0关闭，1开启，2审核中" prop="shopState">
+                <i-input v-model="ocShop.shopState" placeholder="店铺状态，0关闭，1开启，2审核中"/>
+            </Form-item>
+            <Form-item label="店铺关闭原因" prop="shopCloseInfo">
+                <i-input v-model="ocShop.shopCloseInfo" placeholder="店铺关闭原因"/>
+            </Form-item>
+            <Form-item label="店铺排序" prop="shopSort">
+                <i-input v-model="ocShop.shopSort" placeholder="店铺排序"/>
+            </Form-item>
+            <Form-item label="店铺logo" prop="shopLogo">
+                <i-input v-model="ocShop.shopLogo" placeholder="店铺logo"/>
+            </Form-item>
+            <Form-item label="店铺横幅" prop="shopBanner">
+                <i-input v-model="ocShop.shopBanner" placeholder="店铺横幅"/>
+            </Form-item>
+            <Form-item label="店铺头像" prop="shopAvatar">
+                <i-input v-model="ocShop.shopAvatar" placeholder="店铺头像"/>
+            </Form-item>
+            <Form-item label="店铺seo关键字" prop="shopKeywords">
+                <i-input v-model="ocShop.shopKeywords" placeholder="店铺seo关键字"/>
+            </Form-item>
+            <Form-item label="店铺seo描述" prop="shopDescription">
+                <i-input v-model="ocShop.shopDescription" placeholder="店铺seo描述"/>
+            </Form-item>
+            <Form-item label="QQ" prop="shopQq">
+                <i-input v-model="ocShop.shopQq" placeholder="QQ"/>
+            </Form-item>
+            <Form-item label="阿里旺旺" prop="shopWw">
+                <i-input v-model="ocShop.shopWw" placeholder="阿里旺旺"/>
+            </Form-item>
+            <Form-item label="商家电话" prop="shopPhone">
+                <i-input v-model="ocShop.shopPhone" placeholder="商家电话"/>
+            </Form-item>
+            <Form-item label="店铺二级域名" prop="shopDomain">
+                <i-input v-model="ocShop.shopDomain" placeholder="店铺二级域名"/>
+            </Form-item>
+            <Form-item label="二级域名修改次数" prop="shopDomainTimes">
+                <i-input v-model="ocShop.shopDomainTimes" placeholder="二级域名修改次数"/>
+            </Form-item>
+            <Form-item label="推荐，0为否，1为是，默认为0" prop="shopRecommend">
+                <i-input v-model="ocShop.shopRecommend" placeholder="推荐，0为否，1为是，默认为0"/>
+            </Form-item>
+            <Form-item label="店铺信用" prop="shopCredit">
+                <i-input v-model="ocShop.shopCredit" placeholder="店铺信用"/>
+            </Form-item>
+            <Form-item label="描述相符度分数" prop="shopDesccredit">
+                <i-input v-model="ocShop.shopDesccredit" placeholder="描述相符度分数"/>
+            </Form-item>
+            <Form-item label="服务态度分数" prop="shopServicecredit">
+                <i-input v-model="ocShop.shopServicecredit" placeholder="服务态度分数"/>
+            </Form-item>
+            <Form-item label="发货速度分数" prop="shopDeliverycredit">
+                <i-input v-model="ocShop.shopDeliverycredit" placeholder="发货速度分数"/>
+            </Form-item>
+            <Form-item label="店铺收藏数量" prop="shopCollect">
+                <i-input v-model="ocShop.shopCollect" placeholder="店铺收藏数量"/>
+            </Form-item>
+            <Form-item label="店铺印章" prop="shopStamp">
+                <i-input v-model="ocShop.shopStamp" placeholder="店铺印章"/>
+            </Form-item>
+            <Form-item label="打印订单页面下方说明文字" prop="shopPrintdesc">
+                <i-input v-model="ocShop.shopPrintdesc" placeholder="打印订单页面下方说明文字"/>
+            </Form-item>
+            <Form-item label="店铺销售额（不计算退款）" prop="shopSales">
+                <i-input v-model="ocShop.shopSales" placeholder="店铺销售额（不计算退款）"/>
+            </Form-item>
+            <Form-item label="店铺账户余额" prop="shopAccount">
+                <i-input v-model="ocShop.shopAccount" placeholder="店铺账户余额"/>
+            </Form-item>
+            <Form-item label="店铺可提现金额" prop="shopCash">
+                <i-input v-model="ocShop.shopCash" placeholder="店铺可提现金额"/>
+            </Form-item>
+            <Form-item label="工作时间" prop="shopWorkingtime">
+                <i-input v-model="ocShop.shopWorkingtime" placeholder="工作时间"/>
+            </Form-item>
+            <Form-item label="商铺名称" prop="liveStoreName">
+                <i-input v-model="ocShop.liveStoreName" placeholder="商铺名称"/>
+            </Form-item>
+            <Form-item label="商家地址" prop="liveStoreAddress">
+                <i-input v-model="ocShop.liveStoreAddress" placeholder="商家地址"/>
+            </Form-item>
+            <Form-item label="商铺电话" prop="liveStoreTel">
+                <i-input v-model="ocShop.liveStoreTel" placeholder="商铺电话"/>
+            </Form-item>
+            <Form-item label="公交线路" prop="liveStoreBus">
+                <i-input v-model="ocShop.liveStoreBus" placeholder="公交线路"/>
+            </Form-item>
+            <Form-item label="商家兑换码前缀" prop="shopVrcodePrefix">
+                <i-input v-model="ocShop.shopVrcodePrefix" placeholder="商家兑换码前缀"/>
+            </Form-item>
+            <Form-item label="7天退换" prop="storeQtian">
+                <i-input v-model="ocShop.storeQtian" placeholder="7天退换"/>
+            </Form-item>
+            <Form-item label="正品保障" prop="shopZhping">
+                <i-input v-model="ocShop.shopZhping" placeholder="正品保障"/>
+            </Form-item>
+            <Form-item label="两小时发货" prop="shopErxiaoshi">
+                <i-input v-model="ocShop.shopErxiaoshi" placeholder="两小时发货"/>
+            </Form-item>
+            <Form-item label="退货承诺" prop="shopTuihuo">
+                <i-input v-model="ocShop.shopTuihuo" placeholder="退货承诺"/>
+            </Form-item>
+            <Form-item label="试用中心" prop="shopShiyong">
+                <i-input v-model="ocShop.shopShiyong" placeholder="试用中心"/>
+            </Form-item>
+            <Form-item label="实体验证" prop="shopShiti">
+                <i-input v-model="ocShop.shopShiti" placeholder="实体验证"/>
+            </Form-item>
+            <Form-item label="消协保证" prop="shopXiaoxie">
+                <i-input v-model="ocShop.shopXiaoxie" placeholder="消协保证"/>
+            </Form-item>
+            <Form-item label="货到付款" prop="shopHuodaofk">
+                <i-input v-model="ocShop.shopHuodaofk" placeholder="货到付款"/>
+            </Form-item>
+            <Form-item label="商家配送时间" prop="shopFreeTime">
+                <i-input v-model="ocShop.shopFreeTime" placeholder="商家配送时间"/>
+            </Form-item>
+            <Form-item label="店铺默认配送区域" prop="shopRegion">
+                <i-input v-model="ocShop.shopRegion" placeholder="店铺默认配送区域"/>
+            </Form-item>
+            <Form-item label="推荐招商员用户id" prop="recommendUid">
+                <i-input v-model="ocShop.recommendUid" placeholder="推荐招商员用户id"/>
+            </Form-item>
+            <Form-item label="店铺公众号" prop="shopQrcode">
+                <i-input v-model="ocShop.shopQrcode" placeholder="店铺公众号"/>
+            </Form-item>
+            <Form-item label="店铺时间" prop="shopCreateTime">
+                <i-input v-model="ocShop.shopCreateTime" placeholder="店铺时间"/>
+            </Form-item>
+            <Form-item label="店铺关闭时间" prop="shopEndTime">
+                <i-input v-model="ocShop.shopEndTime" placeholder="店铺关闭时间"/>
+            </Form-item>
+            <Form-item label="创建日期" prop="createTime">
+                <i-input v-model="ocShop.createTime" placeholder="创建日期"/>
+            </Form-item>
+            <Form-item label="修改日期" prop="updateTime">
+                <i-input v-model="ocShop.updateTime" placeholder="修改日期"/>
+            </Form-item>
+            <Form-item>
+                <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
+                <i-button type="warning" @click="reload" style="margin-left: 8px"/>返回</i-button>
+                <i-button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+            </Form-item>
+        </i-form>
+	</Card>
+</div>
+
+<script src="${rc.contextPath}/js/shop/ocshop.js?_${date.systemTime}"></script>
+</body>
+</html>

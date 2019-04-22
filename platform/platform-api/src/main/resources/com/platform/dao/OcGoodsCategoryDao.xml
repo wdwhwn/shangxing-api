@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcGoodsCategoryDao">
+
+    <resultMap type="com.platform.entity.OcGoodsCategoryEntity" id="ocGoodsCategoryMap">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="shortName" column="short_name"/>
+        <result property="categoryPic" column="category_pic"/>
+        <result property="cover" column="cover"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isVisible" column="is_visible"/>
+        <result property="level" column="level"/>
+        <result property="sort" column="sort"/>
+        <result property="openn" column="open"/>
+		<collection property="ocGoodsCategoryEntityList"  ofType="com.platform.entity.OcGoodsCategoryEntity" >
+			<result property="id" column="id1"/>
+			<result property="pid" column="pid1"/>
+			<result property="categoryName" column="category_name1"/>
+			<result property="shortName" column="short_name1"/>
+			<result property="categoryPic" column="category_pic1"/>
+			<result property="cover" column="cover1"/>
+			<result property="createTime" column="create_time1"/>
+			<result property="updateTime" column="update_time1"/>
+			<result property="isVisible" column="is_visible1"/>
+			<result property="level" column="level1"/>
+			<result property="sort" column="sort1"/>
+			<result property="open" column="open1"/>
+		<collection property="ocGoodsCategoryEntityList"  ofType="com.platform.entity.OcGoodsCategoryEntity" >
+			<result property="id" column="id2"/>
+			<result property="pid" column="pid2"/>
+			<result property="categoryName" column="category_name2"/>
+			<result property="shortName" column="short_name2"/>
+			<result property="categoryPic" column="category_pic2"/>
+			<result property="cover" column="cover2"/>
+			<result property="createTime" column="create_time2"/>
+			<result property="updateTime" column="update_time2"/>
+			<result property="isVisible" column="is_visible2"/>
+			<result property="level" column="level2"/>
+			<result property="sort" column="sort2"/>
+			<result property="open" column="open2"/>
+		</collection>
+		</collection>
+    </resultMap>
+
+	<!--查询所有类别-->
+	<select id="selectAll" resultMap="ocGoodsCategoryMap">
+		select
+		d.*,
+		c.`id` id2,
+		c.`pid` pid2,
+		c.`category_name` category_name2,
+		c.`short_name` short_name2,
+		c.`category_pic` category_pic2,
+		c.`cover` cover2,
+		c.`create_time` create_time2,
+		c.`update_time` update_time2,
+		c.`is_visible` is_visible2,
+		c.`level` level2,
+		c.`sort` sort2,
+		c.`open` open2
+ 		from (select
+		a.`id` id,
+		a.`pid` pid,
+		a.`category_name` category_name,
+		a.`short_name` short_name,
+		a.`category_pic` category_pic,
+		a.`cover` cover,
+		a.`create_time` create_time,
+		a.`update_time` update_time,
+		a.`is_visible` is_visible,
+		a.`level` level,
+		a.`sort` sort,
+		a.`open` openn,
+		b.`id` id1,
+		b.`pid` pid1,
+		b.`category_name` category_name1,
+		b.`short_name` short_name1,
+		b.`category_pic` category_pic1,
+		b.`cover` cover1,
+		b.`create_time` create_time1,
+		b.`update_time` update_time1,
+		b.`is_visible` is_visible1,
+		b.`level` level1,
+		b.`sort` sort1,
+		b.`open` open1
+		from oc_goods_category a
+		inner join oc_goods_category b on a.id=b.pid where a.pid=0) d left join oc_goods_category c on d.id1=c.pid
+	</select>
+
+	<select id="queryObject" resultType="com.platform.entity.OcGoodsCategoryEntity">
+		select
+			`id`,
+			`pid`,
+			`category_name`,
+			`short_name`,
+			`category_pic`,
+			`cover`,
+			`create_time`,
+			`update_time`,
+			`is_visible`,
+			`level`,
+			`sort`,
+			`open`
+		from oc_goods_category
+		where id = #{id}
+	</select>
+
+
+	<select id="queryList" resultType="com.platform.entity.OcGoodsCategoryEntity">
+		select
+    		`id`,
+    		`pid`,
+    		`category_name`,
+    		`short_name`,
+    		`category_pic`,
+    		`cover`,
+    		`create_time`,
+    		`update_time`,
+    		`is_visible`,
+    		`level`,
+    		`sort`,
+    		`open`
+		from oc_goods_category
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_goods_category
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.OcGoodsCategoryEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into oc_goods_category(
+			`pid`,
+			`category_name`,
+			`short_name`,
+			`category_pic`,
+			`cover`,
+			`create_time`,
+			`update_time`,
+			`is_visible`,
+			`level`,
+			`sort`,
+			`open`)
+		values(
+			#{pid},
+			#{categoryName},
+			#{shortName},
+			#{categoryPic},
+			#{cover},
+			#{createTime},
+			#{updateTime},
+			#{isVisible},
+			#{level},
+			#{sort},
+			#{open})
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.OcGoodsCategoryEntity">
+		update oc_goods_category 
+		<set>
+			<if test="pid != null">`pid` = #{pid}, </if>
+			<if test="categoryName != null">`category_name` = #{categoryName}, </if>
+			<if test="shortName != null">`short_name` = #{shortName}, </if>
+			<if test="categoryPic != null">`category_pic` = #{categoryPic}, </if>
+			<if test="cover != null">`cover` = #{cover}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="isVisible != null">`is_visible` = #{isVisible}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="open != null">`open` = #{open}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_goods_category where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_goods_category where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

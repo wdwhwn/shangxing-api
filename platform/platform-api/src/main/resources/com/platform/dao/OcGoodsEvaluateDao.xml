@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcGoodsEvaluateDao">
+
+    <resultMap type="com.platform.entity.OcGoodsEvaluateEntity" id="ocGoodsEvaluateMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="goodsImage" column="goods_image"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="content" column="content"/>
+        <result property="image" column="image"/>
+        <result property="explainFirst" column="explain_first"/>
+        <result property="memberName" column="member_name"/>
+        <result property="mid" column="mid"/>
+        <result property="isAnonymous" column="is_anonymous"/>
+        <result property="scores" column="scores"/>
+        <result property="againContent" column="again_content"/>
+        <result property="againImage" column="again_image"/>
+        <result property="againExplain" column="again_explain"/>
+        <result property="explainType" column="explain_type"/>
+        <result property="isShow" column="is_show"/>
+        <result property="addtime" column="addtime"/>
+        <result property="againAddtime" column="again_addtime"/>
+    </resultMap>
+<!--商品评价-->
+	<select id="queryObject" resultType="com.platform.entity.OcGoodsEvaluateEntity">
+		select
+			`id`,
+			`order_id`,
+			`order_no`,
+			`goods_id`,
+			`goods_name`,
+			`goods_price`,
+			`goods_image`,
+			`shop_id`,
+			`shop_name`,
+			`content`,
+			`image`,
+			`explain_first`,
+			`member_name`,
+			`mid`,
+			`is_anonymous`,
+			`scores`,
+			`again_content`,
+			`again_image`,
+			`again_explain`,
+			`explain_type`,
+			`is_show`,
+			`addtime`,
+			`again_addtime`
+		from oc_goods_evaluate
+		where goods_id = #{goodsId}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.OcGoodsEvaluateEntity">
+		select
+    		`id`,
+    		`order_id`,
+    		`order_no`,
+    		`goods_id`,
+    		`goods_name`,
+    		`goods_price`,
+    		`goods_image`,
+    		`shop_id`,
+    		`shop_name`,
+    		`content`,
+    		`image`,
+    		`explain_first`,
+    		`member_name`,
+    		`mid`,
+    		`is_anonymous`,
+    		`scores`,
+    		`again_content`,
+    		`again_image`,
+    		`again_explain`,
+    		`explain_type`,
+    		`is_show`,
+    		`addtime`,
+    		`again_addtime`
+		from oc_goods_evaluate
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_goods_evaluate
+		WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.OcGoodsEvaluateEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into oc_goods_evaluate(
+			`order_id`,
+			`order_no`,
+			`goods_id`,
+			`goods_name`,
+			`goods_price`,
+			`goods_image`,
+			`shop_id`,
+			`shop_name`,
+			`content`,
+			`image`,
+			`explain_first`,
+			`member_name`,
+			`mid`,
+			`is_anonymous`,
+			`scores`,
+			`again_content`,
+			`again_image`,
+			`again_explain`,
+			`explain_type`,
+			`is_show`,
+			`addtime`,
+			`again_addtime`)
+		values(
+			#{orderId},
+			#{orderNo},
+			#{goodsId},
+			#{goodsName},
+			#{goodsPrice},
+			#{goodsImage},
+			#{shopId},
+			#{shopName},
+			#{content},
+			#{image},
+			#{explainFirst},
+			#{memberName},
+			#{mid},
+			#{isAnonymous},
+			#{scores},
+			#{againContent},
+			#{againImage},
+			#{againExplain},
+			#{explainType},
+			#{isShow},
+			#{addtime},
+			#{againAddtime})
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.OcGoodsEvaluateEntity">
+		update oc_goods_evaluate 
+		<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="orderNo != null">`order_no` = #{orderNo}, </if>
+			<if test="goodsId != null">`goods_id` = #{goodsId}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="goodsPrice != null">`goods_price` = #{goodsPrice}, </if>
+			<if test="goodsImage != null">`goods_image` = #{goodsImage}, </if>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="shopName != null">`shop_name` = #{shopName}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="image != null">`image` = #{image}, </if>
+			<if test="explainFirst != null">`explain_first` = #{explainFirst}, </if>
+			<if test="memberName != null">`member_name` = #{memberName}, </if>
+			<if test="mid != null">`mid` = #{mid}, </if>
+			<if test="isAnonymous != null">`is_anonymous` = #{isAnonymous}, </if>
+			<if test="scores != null">`scores` = #{scores}, </if>
+			<if test="againContent != null">`again_content` = #{againContent}, </if>
+			<if test="againImage != null">`again_image` = #{againImage}, </if>
+			<if test="againExplain != null">`again_explain` = #{againExplain}, </if>
+			<if test="explainType != null">`explain_type` = #{explainType}, </if>
+			<if test="isShow != null">`is_show` = #{isShow}, </if>
+			<if test="addtime != null">`addtime` = #{addtime}, </if>
+			<if test="againAddtime != null">`again_addtime` = #{againAddtime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_goods_evaluate where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_goods_evaluate where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

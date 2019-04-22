@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.OcMemberAddressDao">
+
+    <resultMap type="com.platform.entity.OcMemberAddressEntity" id="ocMemberAddressMap">
+        <result property="id" column="id"/>
+        <result property="mid" column="mid"/>
+        <result property="name" column="name"/>
+        <result property="mobile" column="mobile"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="districtId" column="district_id"/>
+        <result property="locationplace" column="locationplace"/>
+        <result property="addressDetail" column="address_detail"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.OcMemberAddressEntity">
+		select
+			`id`,
+			`mid`,
+			`name`,
+			`mobile`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`address_detail`,
+			`is_default`,
+			`create_time`,
+			`update_time`,
+			`status`
+		from oc_member_address
+		where id = #{id} and status=1
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.OcMemberAddressEntity">
+		select
+    		`id`,
+    		`mid`,
+    		`name`,
+    		`mobile`,
+    		`province_id`,
+    		`city_id`,
+    		`district_id`,
+    		`locationplace`,
+    		`address_detail`,
+    		`is_default`,
+    		`create_time`,
+    		`update_time`,
+    		`status`
+		from oc_member_address
+		WHERE status=1
+		<if test="mid != null">
+			AND mid =#{mid}
+		</if>
+        <choose>
+            <when test="sidx != null">
+                order by ${sidx} ${order}
+            </when>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from oc_member_address
+		WHERE status=1
+        <if test="mid != null ">
+            AND mid =#{mid}
+        </if>
+	</select>
+	 <!--地址添加-->
+	<insert id="save" parameterType="com.platform.entity.OcMemberAddressEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into oc_member_address(
+			`mid`,
+			`name`,
+			`mobile`,
+			`province_id`,
+			`city_id`,
+			`district_id`,
+			`locationplace`,
+			`address_detail`,
+			`is_default`,
+			`create_time`,
+			`update_time`,
+			`status`)
+		values(
+			#{mid},
+			#{name},
+			#{mobile},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{locationplace},
+			#{addressDetail},
+			#{isDefault},
+			#{createTime},
+			#{updateTime},
+			#{status})
+	</insert>
+
+	 <!--地址编辑-->
+	<update id="update" parameterType="com.platform.entity.OcMemberAddressEntity">
+		update oc_member_address 
+		<set>
+			<if test="mid != null">`mid` = #{mid}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="provinceId != null">`province_id` = #{provinceId}, </if>
+			<if test="cityId != null">`city_id` = #{cityId}, </if>
+			<if test="districtId != null">`district_id` = #{districtId}, </if>
+			<if test="locationplace != null">`locationplace` = #{locationplace}, </if>
+			<if test="addressDetail != null">`address_detail` = #{addressDetail}, </if>
+			<if test="isDefault != null">`is_default` = #{isDefault}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from oc_member_address where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from oc_member_address where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+<!--地址删除-->
+	<update id="updateBach">
+		update  oc_member_address set  status='0'  where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!--当前地址设为默认地址-->
+	<update id="updateOneToDefault">
+		update oc_member_address set is_default='1'  where id=#{id}
+	</update>
+	<!--其它地址设为非默认地址-->
+	<update id="updateAllToNoDefault">
+		update oc_member_address set  is_default='0'  where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	<!--查询当前用户的所有收货地址id-->
+	<select id="queryTotalToId" resultType="Integer">
+		select
+		`id`
+		from oc_member_address
+		where mid = #{mid}
+	</select>
+
+</mapper>
