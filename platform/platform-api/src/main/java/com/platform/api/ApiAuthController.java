@@ -52,7 +52,6 @@ public class ApiAuthController extends ApiBaseAction {
     @ApiOperation(value = "登录接口")
     public R login(String mobile, String password) {
         Assert.isBlank(mobile, "手机号不能为空");
-        System.out.println("12346");
         Assert.isBlank(password, "密码不能为空");
 
         //用户登录
