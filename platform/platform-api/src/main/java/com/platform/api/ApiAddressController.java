@@ -108,6 +108,7 @@ public class ApiAddressController extends ApiBaseAction {
             return toResponsObject(403, "您无权删除", "");
         }
         addressService.delete(id);
+        System.out.println("test");
         return toResponsSuccess("");
     }
 }
